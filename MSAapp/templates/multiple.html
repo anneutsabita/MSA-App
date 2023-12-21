@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+
+    <title>MSA App</title>
+   
+    <link rel="stylesheet" type="text/css" href="./static/assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="./static/assets/css/font-awesome.css">
+
+    <link rel="stylesheet" href="./static/assets/css/templatemo-softy-pinko.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="#" class="logo">
+                            <img src="./static/assets/images/logo.png" alt="Softy Pinko" />
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/" class="active">Home</a></li>
+                            <li><a href="/about">About</a></li>
+                            
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Welcome Area Start ***** -->
+    <div class="welcome-area" id="welcome">
+
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
+                        <h1>Multiple Sequence Alignment Project
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Header Text End ***** -->
+    </div>
+    <!-- ***** Welcome Area End ***** -->
+
+    <div class="container-xl">
+        <iframe src="/dash" style="width:100%; height:500px;"></iframe>
+    </div>
+    <br>
+    <br>
+    <!-- ***** Features Big Item End ***** -->
+
+    
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="copyright">Copyright &copy; 2020 Softy Pinko Company - Design: TemplateMo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="./static/assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="./static/assets/js/popper.js"></script>
+    <script src="./static/assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="./static/assets/js/scrollreveal.min.js"></script>
+    <script src="./static/assets/js/waypoints.min.js"></script>
+    <script src="./static/assets/js/jquery.counterup.min.js"></script>
+    <script src="./static/assets/js/imgfix.min.js"></script>
+
+    <!-- Global Init -->
+    <script src="./static/assets/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            // Initial data for the select options
+            var paramValues = [
+                'gene_Arabidopsis-thaliana.fna',
+                'gene_Aspergillus-niger.fna',
+                'gene_Dictyostelium-discoideum-AX4.fna',
+                'gene_Glycine-max.fna',
+                'gene_Penicillium-chrysogenum-Wisconsin-54-1255.fna',
+                'gene_Solanum-lycopersicum.fna',
+                'gene_Vitis-vinifera.fna'
+            ];
+
+            // Initialize Select2 with multi-select
+            $('#fileList').select2({
+                data: paramValues.map(function (value) {
+                    return { id: value, text: value };
+                })
+            });
+
+            // Event handler for changes in the selection
+            $('#generateChartBtn').on('click', function () {
+                // Get selected values
+                var selectedValues = $('#fileList').val();
+
+                // Construct the URL
+                var url = 'http://127.0.0.1:5000/list?' + selectedValues.map(function (param, index) {
+                    return 'param' + (index + 1) + '=' + param;
+                }).join('&');
+
+                // Log the generated URL (you can replace this with your actual HTTP GET request)
+                window.location.href = url;
+
+                // Perform your HTTP GET request here using the generated URL
+                // For example, you can use the Fetch API or jQuery.ajax to make the request
+                // Example using Fetch API:
+                // fetch(url)
+                //     .then(response => response.json())
+                //     .then(data => console.log(data))
+                //     .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+
+</body>
+
+</html>
